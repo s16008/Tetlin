@@ -14,6 +14,7 @@ class MainActivity : Activity() {
         setContentView(R.layout.activity_main)
 
         val blockMap: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.blocks)
+        Block.blockImage = blockMap
 
         val container: FrameLayout = findViewById(R.id.borad)
         val board = BoardView(this, blockMap.width)

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.view.View
 import android.widget.FrameLayout
 
 class MainActivity : Activity() {
@@ -20,5 +21,11 @@ class MainActivity : Activity() {
         val board = BoardView(this, blockMap.width)
         tetris = Tetris(board)
         container.addView(board)
+
+        findViewById<View>(R.id.button_left).setOnClickListener(tetris)
+        findViewById<View>(R.id.button_right).setOnClickListener(tetris)
+        findViewById<View>(R.id.button_down).setOnClickListener(tetris)
+        findViewById<View>(R.id.button_up).setOnClickListener(tetris)
+        findViewById<View>(R.id.button_rotate).setOnClickListener(tetris)
     }
 }

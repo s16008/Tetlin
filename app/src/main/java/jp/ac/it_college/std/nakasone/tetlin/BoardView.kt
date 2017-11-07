@@ -14,18 +14,15 @@ import kotlin.concurrent.timer
  */
 class BoardView(context: Context?, private val blockSize: Int) : SurfaceView(context), SurfaceHolder.Callback {
     private var drawTimer: Timer? = null
-    private val blockList = Array(10, { Array<Block?>(23, { null }) })
+    private val blockList: MutableList<MutableList<Block?>> = mutableListOf()
     private val dstRect = Rect(0, 0, blockSize, blockSize)
 
     init {
         holder.addCallback(this)
-        blockList[0][0] = Block.CYAN
-        blockList[1][1] = Block.YELLOW
-        blockList[2][2] = Block.GREEN
-        blockList[3][3] = Block.RED
-        blockList[4][4] = Block.BLUE
-        blockList[5][5] = Block.ORANGE
-        blockList[6][6] = Block.PURPLE
+        for (y in 0..22) {
+            blockList.add(mutableListOf<Block?>(
+                    null, null, null, null, null, null, null, null, null, null))
+        }
     }
 
     companion object {
@@ -61,10 +58,10 @@ class BoardView(context: Context?, private val blockSize: Int) : SurfaceView(con
         val canvas: Canvas? = holder.surface.lockHardwareCanvas()
 
         canvas?.drawColor(Color.WHITE)
-        for (x in 0..9) {
-            for (y in 0..19) {
-                dstRect.offsetTo(x * blockSize, y * blockSize)
-                blockList[x][y]?.render(canvas, dstRect)
+        for (y in 0..19) {
+            for (x in 0..9) {
+                dstRect.offsetTo(x * blockSize, (19 - y) * blockSize)
+                blockList[y][x]?.render(canvas, dstRect)
             }
         }
         holder.surface.unlockCanvasAndPost(canvas)

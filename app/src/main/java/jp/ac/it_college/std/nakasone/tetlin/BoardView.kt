@@ -16,6 +16,7 @@ class BoardView(context: Context?, private val blockSize: Int) : SurfaceView(con
     private var drawTimer: Timer? = null
     private val blockList: MutableList<MutableList<Block?>> = mutableListOf()
     private val dstRect = Rect(0, 0, blockSize, blockSize)
+    var currentTetromino: Tetromino? = null
 
     init {
         holder.addCallback(this)
@@ -64,6 +65,9 @@ class BoardView(context: Context?, private val blockSize: Int) : SurfaceView(con
                 blockList[y][x]?.render(canvas, dstRect)
             }
         }
+
+        currentTetromino?.render(canvas)
+
         holder.surface.unlockCanvasAndPost(canvas)
     }
 

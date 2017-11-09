@@ -27,5 +27,7 @@ class MainActivity : Activity() {
         findViewById<View>(R.id.button_down).setOnClickListener(tetris)
         findViewById<View>(R.id.button_up).setOnClickListener(tetris)
         findViewById<View>(R.id.button_rotate).setOnClickListener(tetris)
+
+        tetris?.debug()
     }
 }

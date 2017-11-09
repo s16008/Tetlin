@@ -16,6 +16,14 @@ enum class Block {
 
     private val src: Rect = Rect()
 
+    fun width(): Int {
+        return src.width()
+    }
+
+    fun height(): Int {
+        return src.height()
+    }
+
     fun render(canvas: Canvas?, dst: Rect) {
         if (src.isEmpty) {
             src.set(0,

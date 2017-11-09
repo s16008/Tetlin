@@ -28,4 +28,16 @@ class Tetromino(val pos: Position, val type: TetrominoType, var rotate: Int = 0)
             type.block.render(canvas, dst)
         }
     }
+
+    fun moveLeft() {
+        pos.x--
+    }
+
+    fun moveRight() {
+        pos.x++
+    }
+
+    fun moveRotate() {
+        rotate++
+    }
 }

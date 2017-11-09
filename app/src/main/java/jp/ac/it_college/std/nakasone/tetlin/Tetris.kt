@@ -11,9 +11,11 @@ class Tetris(private val board: BoardView) : View.OnClickListener {
         when (v?.id) {
             R.id.button_left -> {
                 Log.i("onclick!", "ひだり")
+                board.currentTetromino?.moveLeft()
             }
             R.id.button_right -> {
                 Log.i("onclick!", "みぎ")
+                board.currentTetromino?.moveRight()
             }
             R.id.button_down -> {
                 Log.i("onclick!", "した")
@@ -23,6 +25,7 @@ class Tetris(private val board: BoardView) : View.OnClickListener {
             }
             R.id.button_rotate -> {
                 Log.i("onclick!", "かいてん")
+                board.currentTetromino?.moveRotate()
             }
         }
 

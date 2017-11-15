@@ -43,6 +43,9 @@ class Tetris(private val board: BoardView) : View.OnClickListener {
                 board.currentTetromino?.moveDown()
                 if (!board.checkValid()) {
                     board.currentTetromino?.undo()
+                    board.storeTetromino()
+                    board.deleteLines()
+                    board.currentTetromino = Tetromino.next()
                 }
             }
             isDownSkip = false

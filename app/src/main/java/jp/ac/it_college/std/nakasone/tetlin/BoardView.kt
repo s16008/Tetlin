@@ -21,7 +21,7 @@ class BoardView(context: Context?, private val blockSize: Int) : SurfaceView(con
     init {
         holder.addCallback(this)
         for (y in 0..22) {
-            blockList.add(mutableListOf<Block?>(
+            blockList.add(mutableListOf(
                     null, null, null, null, null, null, null, null, null, null))
         }
     }
@@ -52,10 +52,27 @@ class BoardView(context: Context?, private val blockSize: Int) : SurfaceView(con
     }
 
     fun checkValid(): Boolean {
-        val blocks = currentTetromino?.getPositions()
-        return blocks!!.none {
+        val blocks = currentTetromino?.getPositions() ?: emptyArray()
+        return blocks.none {
             (it.x < 0) || (it.x >= 10) || (it.y < 0) ||
                     (blockList[it.y][it.x] != null)
+        }
+    }
+
+    fun storeTetromino() {
+        val blocks = currentTetromino?.getPositions() ?: emptyArray()
+        blocks.forEach { blockList[it.y][it.x] = currentTetromino?.type?.block }
+    }
+
+    fun deleteLines() {
+        val before = blockList.size
+        blockList.removeAll { it.none { it == null } }
+        val after = blockList.size
+        for (a in 0..(before - after)) {
+            blockList.add(mutableListOf(
+                    null, null, null, null, null, null, null, null, null, null
+            ))
+
         }
     }
 

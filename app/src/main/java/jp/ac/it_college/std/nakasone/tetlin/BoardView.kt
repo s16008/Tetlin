@@ -51,6 +51,14 @@ class BoardView(context: Context?, private val blockSize: Int) : SurfaceView(con
         startTimer()
     }
 
+    fun checkValid(): Boolean {
+        val blocks = currentTetromino?.getPositions()
+        return blocks!!.none {
+            (it.x < 0) || (it.x >= 10) || (it.y < 0) ||
+                    (blockList[it.y][it.x] != null)
+        }
+    }
+
     private fun render() {
         if (holder.isCreating) {
             return

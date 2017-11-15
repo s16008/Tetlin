@@ -29,5 +29,6 @@ class MainActivity : Activity() {
         findViewById<View>(R.id.button_rotate).setOnClickListener(tetris)
 
         tetris?.debug()
+        tetris?.startDropTimer(800)
     }
 }

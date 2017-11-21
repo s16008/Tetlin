@@ -83,7 +83,7 @@ class BoardView(context: Context?, private val blockSize: Int) : SurfaceView(con
 
         val canvas: Canvas? = holder.surface.lockHardwareCanvas()
 
-        canvas?.drawColor(Color.WHITE)
+        canvas?.drawColor(Color.DKGRAY)
         for (y in 0..19) {
             for (x in 0..9) {
                 dstRect.offsetTo(x * blockSize, (19 - y) * blockSize)

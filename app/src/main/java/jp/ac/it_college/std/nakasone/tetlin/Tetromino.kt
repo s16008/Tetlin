@@ -6,15 +6,9 @@ import android.graphics.Rect
 /**
  * テトロミノを表現するやつ
  */
-class Tetromino(val pos: Position, val type: TetrominoType, var rotate: Int = 0) {
+class Tetromino(val type: TetrominoType, val pos: Position = Position(5, 20), var rotate: Int = 0) {
     private val dst: Rect = Rect()
     private var prev: Int = 0
-
-    companion object {
-        fun next(): Tetromino {
-            return Tetromino(Position(5, 17), TetrominoType.T)
-        }
-    }
 
     fun render(canvas: Canvas?) {
         if (dst.isEmpty) {
@@ -26,6 +20,23 @@ class Tetromino(val pos: Position, val type: TetrominoType, var rotate: Int = 0)
         for (b in db) {
             dst.offsetTo(b.x * type.block.width(),
                     (19 - b.y) * type.block.height())
+            type.block.render(canvas, dst)
+        }
+    }
+
+    /**
+     * FIXME: 可能なら renderと統合するように仕様変更したい
+     */
+    fun nextRender(canvas: Canvas?) {
+        if (dst.isEmpty) {
+            dst.set(0, 0,
+                    type.block.width(),
+                    type.block.height())
+        }
+        val db = getPositions()
+        for (b in db) {
+            dst.offsetTo(b.x * type.block.width(),
+                    b.y * type.block.height())
             type.block.render(canvas, dst)
         }
     }

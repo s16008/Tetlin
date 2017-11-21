@@ -17,9 +17,10 @@ class MainActivity : Activity() {
         val blockMap: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.blocks)
         Block.blockImage = blockMap
 
-        val container: FrameLayout = findViewById(R.id.borad)
+        val container = findViewById<FrameLayout>(R.id.board)
         val board = BoardView(this, blockMap.width)
-        tetris = Tetris(board)
+        val next = findViewById<NextView>(R.id.nextView)
+        tetris = Tetris(board, next)
         container.addView(board)
 
         findViewById<View>(R.id.button_left).setOnClickListener(tetris)

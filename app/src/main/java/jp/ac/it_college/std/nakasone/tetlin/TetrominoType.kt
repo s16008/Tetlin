@@ -5,10 +5,11 @@ package jp.ac.it_college.std.nakasone.tetlin
  */
 enum class TetrominoType(val block: Block, val coords: Array<Array<Position>>) {
     I(Block.CYAN, arrayOf(
+            arrayOf(Position(2, 0), Position(1, 0), Position(0, 0), Position(-1, 0)),
+            arrayOf(Position(0, -2), Position(0, -1), Position(0, 0), Position(0, 1)),
             arrayOf(Position(-2, 0), Position(-1, 0), Position(0, 0), Position(1, 0)),
-            arrayOf(Position(0, -1), Position(0, 0), Position(0, 1), Position(0, 2)),
-            arrayOf(Position(-1, 0), Position(0, 0), Position(1, 0), Position(2, 0)),
-            arrayOf(Position(0, -2), Position(0, -1), Position(0, 0), Position(0, 1))
+            arrayOf(Position(0, 2), Position(0, 1), Position(0, 0), Position(0, -1))
+
     )),
     O(Block.YELLOW, arrayOf(
             arrayOf(Position(0, 0), Position(0, 1), Position(1, 1), Position(1, 0)),
@@ -31,7 +32,7 @@ enum class TetrominoType(val block: Block, val coords: Array<Array<Position>>) {
     J(Block.BLUE, arrayOf(
             arrayOf(Position(-1, 1), Position(-1, 0), Position(0, 0), Position(1, 0)),
             arrayOf(Position(1, 1), Position(0, 1), Position(0, 0), Position(0, -1)),
-            arrayOf(Position(-1, 1), Position(1, 0), Position(0, 0), Position(-1, 0)),
+            arrayOf(Position(1, -1), Position(1, 0), Position(0, 0), Position(-1, 0)),
             arrayOf(Position(-1, -1), Position(0, -1), Position(0, 0), Position(0, 1))
     )),
     L(Block.ORANGE, arrayOf(

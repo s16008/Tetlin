@@ -14,10 +14,6 @@ class NextView @JvmOverloads constructor(
     : View(context, attrs, defStyleAttr, defStyleRes) {
 
     var queue: MutableList<Tetromino> = mutableListOf()
-        set(value) {
-            field.clear()
-            field.addAll(value)
-        }
 
     var blockSize: Int = 0
         set(value) {
@@ -40,7 +36,15 @@ class NextView @JvmOverloads constructor(
         }
         for (i in 0..2) {
             val tetromino = queue[i]
-            tetromino.nextRender(canvas)
+            canvas?.save()
+
+            canvas?.translate((blockSize * 1).toFloat(),
+                    (blockSize + i * 3 * blockSize).toFloat())
+
+            canvas?.scale(2f / 3f, 2f / 3f)
+            tetromino.render(canvas, false)
+
+            canvas?.restore()
         }
 
 //        canvas?.drawBitmap()

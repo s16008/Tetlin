@@ -1,5 +1,6 @@
 package jp.ac.it_college.std.nakasone.tetlin
 
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import java.util.*
@@ -13,6 +14,7 @@ class Tetris(private val board: BoardView, private val next: NextView) : View.On
     private var isDownSkip: Boolean = false
     private val tetrominoQueue = mutableListOf<Tetromino>()
     private val rand = Sfmt((System.currentTimeMillis() % Int.MAX_VALUE).toInt())
+    private val handler = Handler()
 
     init {
         next.blockSize = Block.blockImage?.width ?: 0
@@ -56,6 +58,10 @@ class Tetris(private val board: BoardView, private val next: NextView) : View.On
                 }
             }
             isDownSkip = false
+            handler.post {
+                next.invalidate()
+            }
+
         }
     }
 
@@ -69,7 +75,10 @@ class Tetris(private val board: BoardView, private val next: NextView) : View.On
             generateTetromino()
         }
         val nextTetromino = tetrominoQueue.removeAt(0)
-        next.invalidate()
+        handler.post {
+            next.invalidate()
+        }
+
         return nextTetromino
     }
 
